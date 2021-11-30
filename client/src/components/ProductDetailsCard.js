@@ -1,8 +1,8 @@
 import React from "react";
-import { Row, Col, ListGroup, Card, Button } from "react-bootstrap";
+import { Row, Col, ListGroup, Card, Button, Form } from "react-bootstrap";
 import Rating from "./Rating";
 
-export function ProductDetailsCard(product) {
+export function ProductDetailsCard(product, qty, setQty, onAddToCart) {
   return (
     <Card className="productDetails">
       <Row>
@@ -48,11 +48,34 @@ export function ProductDetailsCard(product) {
                 </Col>
               </Row>
             </ListGroup.Item>
+            {product.countInStock > 0 && (
+              <ListGroup.Item>
+                <Row>
+                  <Col>Qty</Col>
+                  <Col>
+                    <Form>
+                      <Form.Control
+                        as="select"
+                        value={qty}
+                        onChange={(e) => setQty(e.target.value)}
+                      >
+                        {[...Array(product.countInStock).keys()].map((x) => (
+                          <option key={x + 1} value={x + 1}>
+                            {x + 1}
+                          </option>
+                        ))}
+                      </Form.Control>
+                    </Form>
+                  </Col>
+                </Row>
+              </ListGroup.Item>
+            )}
             <ListGroup.Item className="block-item">
               <Button
                 className="btn btn-block btn-dark"
                 type="button"
                 disabled={product.countInStock === 0}
+                onClick={onAddToCart}
               >
                 Add to Cart
               </Button>

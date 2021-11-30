@@ -5,8 +5,9 @@ import { Container } from "react-bootstrap";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Home from "./pages/Home";
-import ProductDetails from "./pages/ProductDetails";
+import HomePage from "./pages/HomePage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import CartPage from "./pages/CartPage";
 
 function App() {
   return (
@@ -15,8 +16,10 @@ function App() {
       <main className="mt-5 py-3">
         <Container>
           <Routes>
-            <Route path="/" element={<Home />} exact />
-            <Route path="/product/:id" element={<ProductDetails />} />
+            <Route path="/" element={<HomePage />} exact />
+            <Route path="/product/:id" element={<ProductDetailsPage />} />
+            <Route path="/cart" exact element={<CartPage />} />
+            <Route path="/cart/:id" element={<CartPage />} />
           </Routes>
         </Container>
       </main>
