@@ -1,6 +1,15 @@
 main {
   min-height: 80vh;
 }
+a {
+  text-decoration: none !important;
+}
+.navbar-brand a {
+  color: #fff;
+}
+.nav-links a {
+  color: #fff;
+}
 
 .productCard.card,
 .productDetails.card,

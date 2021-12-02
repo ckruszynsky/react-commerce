@@ -10,23 +10,22 @@ const Header = () => {
     <Navbar
       bg={isDark ? "dark" : "light"}
       variant={isDark ? "dark" : "light"}
-      fixed="top"
       expand="lg"
       collapseOnSelect
     >
       <Container className="header-container">
         <Navbar.Brand>
           <Link to="/">
-            <h2>
-              <img src={ECommerceIcon} height="50" width="70" alt="logo" />
-              <span className="ml-4">Pro Shop</span>
-            </h2>
+            <h1>
+              <img src={ECommerceIcon} height="45" alt="logo" />
+              <span className="ml-4 text-center">Pro Shop</span>
+            </h1>
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav
-            className={`nav-links ms-auto ${
+            className={`nav-links ml-auto ${
               isDark ? "text-light" : "text-dark"
             }`}
           >

@@ -13,7 +13,7 @@ function App() {
   return (
     <Router>
       <Header />
-      <main className="mt-5 py-3">
+      <main className="mt-9 py-3">
         <Container>
           <Routes>
             <Route path="/" element={<HomePage />} exact />

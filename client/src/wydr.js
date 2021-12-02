@@ -5,5 +5,18 @@ if (process.env.NODE_ENV === "development") {
   whyDidYouRender(React, {
     trackAllPureComponents: true,
     trackHooks: true,
+    trackComponentUpdates: true,
+    trackComponentSize: true,
+    trackRefs: true,
+    trackContext: true,
+    trackChildren: true,
+    trackProps: true,
+    trackError: true,
+    trackSuspense: true,
+    logOnDifferentValues: true,
+    logOnRender: true,
+    logOnUpdates: false,
+    logOnSuspenseFallback: true,
+    customHooks: ["useSelector", "useDispatch"],
   });
 }

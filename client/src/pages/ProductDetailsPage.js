@@ -11,7 +11,7 @@ import Loader from "../components/Loader";
 
 const ProductDetailsPage = () => {
   const navigate = useNavigate();
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const searchParams = useParams();
   const dispatch = useDispatch();
   const productDetails = useSelector((state) => state.productDetails);
