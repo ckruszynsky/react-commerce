@@ -26,7 +26,6 @@ const CartPage = () => {
   const { cartItems } = useSelector((state) => state.cart);
 
   useEffect(() => {
-    console.log("loding cart items");
     if (id) {
       dispatch(addToCart(id, qty));
     }
