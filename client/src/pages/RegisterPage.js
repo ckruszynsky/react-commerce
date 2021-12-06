@@ -6,18 +6,21 @@ import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import FormContainer from "../components/FormContainer";
-import { login } from "../actions/userActions";
+import { register } from "../actions/userActions";
 
-const LoginPage = () => {
+const RegisterPage = () => {
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState(null);
   const [validated, setValidated] = useState(false);
-
   const dispatch = useDispatch();
 
+  const userRegister = useSelector((state) => state.userRegister);
   const userLogin = useSelector((state) => state.userLogin);
-
-  const { loading, error, currentUser } = userLogin;
+  const { loading, error } = userRegister;
+  const { currentUser } = userLogin;
 
   const searchParams = useParams();
   const navigate = useNavigate();
@@ -38,21 +41,39 @@ const LoginPage = () => {
       e.preventDefault();
       e.stopPropagation();
     }
+
     setValidated(true);
-    dispatch(login(email, password));
+    if (password !== confirmPassword) {
+      setMessage("Passwords do not match");
+      return;
+    }
+    dispatch(register(name, email, password));
   };
   return (
     <FormContainer>
-      <h1>Sign In</h1>
+      <h1>Register</h1>
       {error && <Message variant="danger">{error}</Message>}
+      {message && <Message variant="danger">{message}</Message>}
       {loading && <Loader />}
       <Form onSubmit={submitHandler} noValidate validated={validated}>
+        <Form.Group controlId="name">
+          <Form.Label>Name:</Form.Label>
+          <Form.Control
+            required
+            type="text"
+            placeholder="Jane Doe"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <Form.Control.Feedback type="invalid" />
+          <Form.Control.Feedback type="valid" />
+        </Form.Group>
         <Form.Group controlId="email">
           <Form.Label>Email Address:</Form.Label>
           <Form.Control
-            type="email"
             required
-            placeholder="Enter email"
+            type="email"
+            placeholder="janedoe@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -64,26 +85,38 @@ const LoginPage = () => {
           <Form.Control
             required
             type="password"
-            placeholder="Enter password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
           <Form.Control.Feedback type="invalid" />
           <Form.Control.Feedback type="valid" />
         </Form.Group>
+        <Form.Group controlId="confirmPassword">
+          <Form.Label>Confirm Password:</Form.Label>
+          <Form.Control
+            required
+            type="password"
+            placeholder="Confirm Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+          />
+          <Form.Control.Feedback type="invalid" />
+          <Form.Control.Feedback type="valid" />
+        </Form.Group>
         <Button type="submit" variant="primary">
-          Sign In
+          Sign Up
         </Button>
       </Form>
       <Row className="py-3">
         <Col>
-          New Customer?
-          <Link to={redirect ? `/register?redirect=${redirect}` : "/register"}>
-            Register Here
+          Existing Customer ?
+          <Link to={redirect ? `/login?redirect=${redirect}` : "/login"}>
+            Login
           </Link>
         </Col>
       </Row>
     </FormContainer>
   );
 };
-export default LoginPage;
+export default RegisterPage;

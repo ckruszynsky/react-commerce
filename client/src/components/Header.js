@@ -31,7 +31,7 @@ const Header = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav
-              className={`nav-links ml-auto text-dark`}
+              className={`nav-links ms-auto ml-auto text-dark`}
               style={{ display: "flex", alignItems: "baseline" }}
             >
               <Link to="/cart">
