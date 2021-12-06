@@ -8,6 +8,7 @@ import Header from "./components/Header";
 import HomePage from "./pages/HomePage";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import CartPage from "./pages/CartPage";
+import LoginPage from "./pages/LoginPage";
 
 function App() {
   return (
@@ -16,10 +17,11 @@ function App() {
       <main className="mt-9 py-3">
         <Container>
           <Routes>
-            <Route path="/" element={<HomePage />} exact />
+            <Route path="/login" element={<LoginPage />} />
             <Route path="/product/:id" element={<ProductDetailsPage />} />
             <Route path="/cart" exact element={<CartPage />} />
             <Route path="/cart/:id" element={<CartPage />} />
+            <Route path="/" element={<HomePage />} exact />
           </Routes>
         </Container>
       </main>

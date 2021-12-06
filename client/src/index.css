@@ -43,3 +43,11 @@ a {
   padding-right: 25px;
   font-weight: 300;
 }
+
+.profile-nav a {
+  color: #000;
+}
+
+Form > div {
+  margin-bottom: 1.5rem;
+}
