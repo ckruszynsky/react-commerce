@@ -6,12 +6,6 @@ import generateToken from "../utils.js/generateToken.js";
  * @desc    Get user profile
  * @route   GET /api/users/profile
  * @access  Private
- * @returns {object} 200 - User object
- * @returns {object} 400 - Invalid token
- * @returns {object} 500 - Server error
- * @returns {object} 404 - User not found
- * @returns {object} 401 - Unauthorized
- * @returns {object} 403 - Forbidden
  */
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
@@ -21,6 +15,33 @@ const getUserProfile = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       isAdmin: user.isAdmin,
+    });
+  } else {
+    res.status(404);
+    throw new Error("User not found");
+  }
+});
+
+/**
+ * @desc    Get user profile
+ * @route   PUT /api/users/profile
+ * @access  Private
+ */
+const updateUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    if (req.body.password) {
+      user.password = req.body.password;
+    }
+    const updatedUser = await user.save();
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser._id),
     });
   } else {
     res.status(404);
@@ -62,4 +83,4 @@ const registerUser = asyncHandler(async (req, res, next) => {
   }
 });
 
-export { getUserProfile, registerUser };
+export { getUserProfile, updateUserProfile, registerUser };
